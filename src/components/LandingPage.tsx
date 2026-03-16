@@ -2,7 +2,8 @@ import { motion, AnimatePresence } from "motion/react";
 import { MessageCircle, CheckCircle2, MapPin, Home, Users, Layers, Waves, Coffee, PartyPopper, Baby, Trophy, Dumbbell, ShieldCheck, Truck, Sun, UserCheck, ChevronLeft, ChevronRight, Menu, X, Maximize2 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
-const WHATSAPP_LINK = "https://wa.me/5582982323030";
+const WHATSAPP_MESSAGE = encodeURIComponent("Olá! Gostaria de receber mais informações sobre o Mood Jacarecica. Tenho interesse em conhecer as condições de lançamento e saber mais sobre a entrega prevista para Junho de 2029.");
+const WHATSAPP_LINK = `https://wa.me/5582982323030?text=${WHATSAPP_MESSAGE}`;
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -142,6 +143,17 @@ const Hero = () => {
             <p className="text-xl sm:text-3xl font-bold text-white">
               Parcelas a partir de <span className="text-primary-light">R$ 1.000</span> nos primeiros anos de financiamento.
             </p>
+            <div className="mt-4 pt-4 border-t border-white/10 flex items-center gap-4 text-sm font-medium">
+              <div className="flex items-center gap-2 text-primary-light">
+                <ShieldCheck size={18} />
+                <span>Garantia Moura Dubeux</span>
+              </div>
+              <div className="w-1 h-1 bg-white/30 rounded-full"></div>
+              <div className="flex items-center gap-2">
+                <Layers size={18} className="text-primary-light" />
+                <span>Entrega: Junho/2029</span>
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -174,10 +186,10 @@ const Concept = () => {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl">
+            <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
               <img
-                src="/assets/images/acesso.jpg"
-                alt="Conceito Mood"
+                src="/assets/images/mapa_aereo.jpg"
+                alt="Localização Estratégica"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -356,15 +368,17 @@ const Gallery = () => {
   const categories = {
     lazer: [
       { url: "/assets/images/piscina.jpg", title: "Piscina com Deck Molhado" },
+      { url: "/assets/images/academia.png", title: "Fitness Center Moderno" },
       { url: "/assets/images/acesso.jpg", title: "Acesso e Fachada" },
       { url: "/assets/images/fachadaaa.png", title: "Vista Geral" },
     ],
     apartamentos: [
-      { url: "/assets/images/sala_65m2.jpg", title: "Sala de Estar Ampliada (65m²)" },
+      { url: "/assets/images/sala_65m2.png", title: "Sala de Estar Ampliada (65m²)" },
       { url: "/assets/images/quarto_65m2.jpg", title: "Suíte Master Aconchegante (65m²)" },
-      { url: "/assets/images/varanda_65m2.jpg", title: "Varanda Gourmet (65m²)" },
-      { url: "/assets/images/sala_53m2.jpg", title: "Sala de Estar Integrada (53m²)" },
-      { url: "/assets/images/varanda_53m2.jpg", title: "Varanda com Vista (53m²)" },
+      { url: "/assets/images/gourmet_interno.png", title: "Espaço Gourmet Interno" },
+      { url: "/assets/images/varanda_65m2.png", title: "Varanda Gourmet (65m²)" },
+      { url: "/assets/images/sala_53m2.png", title: "Sala de Estar Integrada (53m²)" },
+      { url: "/assets/images/varanda_53m2.png", title: "Varanda com Vista (53m²)" },
     ],
     plantas: [
       { url: "/assets/images/planta_tipo.jpg", title: "Pavimento Tipo (1º ao 19º)" },
@@ -375,6 +389,8 @@ const Gallery = () => {
   };
 
   const currentImages = categories[activeTab as keyof typeof categories];
+  const activeImageSafe = activeImage < currentImages.length ? activeImage : 0;
+  const currentImage = currentImages[activeImageSafe];
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -400,6 +416,7 @@ const Gallery = () => {
 
   useEffect(() => {
     setActiveImage(0);
+    setDirection(0);
   }, [activeTab]);
 
   return (
@@ -414,7 +431,11 @@ const Gallery = () => {
             {Object.keys(categories).map((tab) => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => {
+                  setActiveTab(tab);
+                  setActiveImage(0);
+                  setDirection(0);
+                }}
                 className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all ${activeTab === tab
                   ? "bg-primary text-white shadow-lg shadow-primary/20"
                   : "bg-bg-pastel text-gray-500 hover:bg-gray-200"
@@ -440,18 +461,18 @@ const Gallery = () => {
                 opacity: { duration: 0.2 }
               }}
               className="absolute inset-0 cursor-zoom-in"
-              onClick={() => setSelectedImage(currentImages[activeImage])}
+              onClick={() => setSelectedImage(currentImage)}
             >
               <div className="w-full h-full rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl relative">
                 <img
-                  src={currentImages[activeImage].url}
-                  alt={currentImages[activeImage].title}
+                  src={currentImage.url}
+                  alt={currentImage.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end">
                   <div className="p-8 sm:p-12 w-full flex justify-between items-end">
-                    <p className="text-xl sm:text-3xl font-bold tracking-tight text-white">{currentImages[activeImage].title}</p>
+                    <p className="text-xl sm:text-3xl font-bold tracking-tight text-white">{currentImage.title}</p>
                     <div className="bg-white/20 backdrop-blur-md p-3 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity">
                       <Maximize2 size={24} />
                     </div>
@@ -575,11 +596,11 @@ const Location = () => {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="aspect-video rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white/5">
+            <div className="aspect-video rounded-[2.5rem] overflow-hidden shadow-2xl">
               <img
-                src="/assets/images/mapa_aereo.jpg"
+                src="/assets/images/mapa_aereo2.jpg"
                 alt="Localização Mood Aérea"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover scale-[1.17] origin-center"
               />
             </div>
           </motion.div>
@@ -610,6 +631,7 @@ const Pricing = () => {
                   { label: "Entrada Facilitada", value: "R$ 1.316,67", highlight: true },
                   { label: "59 Mensais durante a obra", value: "R$ 1.316,67", highlight: true },
                   { label: "Financiamento Bancário", value: "R$ 392.000,00" },
+                  { label: "Previsão de Entrega das Chaves", value: "Junho de 2029", highlight: true },
                 ].map((item, i) => (
                   <div key={i} className="flex justify-between items-center py-4 border-b border-gray-100 last:border-0">
                     <span className="text-gray-600 text-sm sm:text-base">{item.label}</span>
