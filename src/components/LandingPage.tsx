@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import { MessageCircle, CheckCircle2, MapPin, Home, Users, Layers, Waves, Coffee, PartyPopper, Baby, Trophy, Dumbbell, ShieldCheck, Truck, Sun, UserCheck, ChevronLeft, ChevronRight, Menu, X, Maximize2 } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 const WHATSAPP_MESSAGE = encodeURIComponent("Olá! Gostaria de receber mais informações sobre o Mood Jacarecica. Tenho interesse em conhecer as condições de lançamento e saber mais sobre a entrega prevista para Junho de 2029.");
 const WHATSAPP_LINK = `https://wa.me/5582982323030?text=${WHATSAPP_MESSAGE}`;
@@ -119,6 +119,8 @@ const Hero = () => {
           src="/assets/images/fachadaaa.png"
           alt="Mood Jacarecica Fachada"
           className="w-full h-full object-cover"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
       </div>
@@ -191,6 +193,8 @@ const Concept = () => {
                 src="/assets/images/mapa_aereo.jpg"
                 alt="Localização Estratégica"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-primary p-6 sm:p-10 rounded-[2rem] text-white hidden sm:block shadow-2xl">
@@ -345,6 +349,8 @@ const Leisure = () => {
                 src="/assets/images/piscina.jpg"
                 alt="Piscina Mood"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="absolute -top-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 hidden sm:block">
@@ -387,6 +393,28 @@ const Gallery = () => {
       { url: "/assets/images/planta_53m2.jpg", title: "Planta Smart - 2 Quartos (53m²)" },
     ]
   };
+
+  // Preload all gallery images after initial load
+  useEffect(() => {
+    const allImages = [
+      ...categories.lazer,
+      ...categories.apartamentos,
+      ...categories.plantas
+    ];
+    
+    // Delay preloading to prioritize initial LCP
+    const timer = setTimeout(() => {
+      allImages.forEach(img => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = img.url;
+        document.head.appendChild(link);
+      });
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const currentImages = categories[activeTab as keyof typeof categories];
   const activeImageSafe = activeImage < currentImages.length ? activeImage : 0;
@@ -469,6 +497,10 @@ const Gallery = () => {
                   alt={currentImage.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
+                  width="1200"
+                  height="800"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end">
                   <div className="p-8 sm:p-12 w-full flex justify-between items-end">
@@ -601,6 +633,8 @@ const Location = () => {
                 src="/assets/images/mapa_aereo2.jpg"
                 alt="Localização Mood Aérea"
                 className="w-full h-full object-cover scale-[1.17] origin-center"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </motion.div>
