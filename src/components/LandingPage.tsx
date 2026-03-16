@@ -329,7 +329,7 @@ const Leisure = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-primary text-white px-8 py-4 sm:px-10 rounded-full text-lg font-bold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20"
               >
-                Ver todas as fotos do lazer
+                Quero saber mais
               </a>
             </div>
           </div>
@@ -367,9 +367,9 @@ const Gallery = () => {
 
   const categories = {
     lazer: [
-      { url: "/assets/images/piscina.jpg", title: "Piscina com Deck Molhado" },
       { url: "/assets/images/academia.png", title: "Fitness Center Moderno" },
-      { url: "/assets/images/acesso.jpg", title: "Acesso e Fachada" },
+      { url: "/assets/images/piscina.png", title: "Piscina" },
+      { url: "/assets/images/acesso.png", title: "Acesso e Fachada" },
       { url: "/assets/images/fachadaaa.png", title: "Vista Geral" },
     ],
     apartamentos: [
