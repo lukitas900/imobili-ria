@@ -401,7 +401,7 @@ const Gallery = () => {
       ...categories.apartamentos,
       ...categories.plantas
     ];
-    
+
     // Delay preloading to prioritize initial LCP
     const timer = setTimeout(() => {
       allImages.forEach(img => {
