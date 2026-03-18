@@ -2,6 +2,20 @@ import { motion, AnimatePresence } from "motion/react";
 import { MessageCircle, CheckCircle2, MapPin, Home, Users, Layers, Waves, Coffee, PartyPopper, Baby, Trophy, Dumbbell, ShieldCheck, Truck, Sun, UserCheck, ChevronLeft, ChevronRight, Menu, X, Maximize2 } from "lucide-react";
 import { useState, useEffect, useCallback, useMemo } from "react";
 
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
+
+const handleContact = () => {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'conversion', {
+      'send_to': 'AW-18020765348/4fkeCNTyo4scEKSd_JBD'
+    });
+  }
+};
+
 const WHATSAPP_MESSAGE = encodeURIComponent("Olá! Gostaria de receber mais informações sobre o Mood Jacarecica. Tenho interesse em conhecer as condições de lançamento e saber mais sobre a entrega prevista para Junho de 2029.");
 const WHATSAPP_LINK = `https://wa.me/5582982323030?text=${WHATSAPP_MESSAGE}`;
 
@@ -47,6 +61,7 @@ const Navbar = () => {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleContact}
               className="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 flex items-center gap-2"
             >
               <MessageCircle size={18} />
@@ -60,6 +75,7 @@ const Navbar = () => {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleContact}
               className={`p-2 rounded-full transition-colors ${isScrolled || isMenuOpen ? 'bg-primary/10 text-primary' : 'bg-white/20 text-white'}`}
             >
               <MessageCircle size={20} />
@@ -98,6 +114,7 @@ const Navbar = () => {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleContact}
                 className="flex items-center justify-center gap-3 bg-primary text-white w-full py-4 rounded-2xl font-bold shadow-lg mt-4"
               >
                 <MessageCircle size={20} />
@@ -165,6 +182,7 @@ const Hero = () => {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleContact}
               className="inline-flex items-center justify-center bg-primary text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full text-lg font-bold hover:bg-primary-dark transition-all shadow-2xl shadow-primary/30 group"
             >
               Quero essa oportunidade!
@@ -331,6 +349,7 @@ const Leisure = () => {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleContact}
                 className="inline-flex items-center justify-center bg-primary text-white px-8 py-4 sm:px-10 rounded-full text-lg font-bold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20"
               >
                 Quero saber mais
@@ -695,6 +714,7 @@ const Pricing = () => {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleContact}
                 className="w-full flex items-center justify-center bg-primary text-white py-5 rounded-2xl text-lg font-bold hover:bg-primary-dark transition-all shadow-xl shadow-primary/20 text-center"
               >
                 Solicitar Tabela Completa
@@ -732,6 +752,7 @@ const CTA = () => {
             href={WHATSAPP_LINK}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={handleContact}
             className="inline-flex items-center justify-center bg-white text-primary px-10 py-5 rounded-full text-xl font-bold hover:bg-gray-50 transition-all shadow-2xl group"
           >
             Quero essa oportunidade!
@@ -785,6 +806,7 @@ const StickyMobileButton = () => {
         href={WHATSAPP_LINK}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={handleContact}
         className="w-full flex items-center justify-center bg-primary text-white py-4 rounded-2xl text-lg font-bold shadow-2xl shadow-primary/30 gap-3"
       >
         <MessageCircle />
