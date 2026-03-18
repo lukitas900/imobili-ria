@@ -143,7 +143,7 @@ const Hero = () => {
           <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 sm:p-8 rounded-2xl mb-8 sm:mb-10 inline-block w-full sm:w-auto">
             <p className="text-base sm:text-xl font-light mb-2 text-gray-200">Condição especial de lançamento:</p>
             <p className="text-xl sm:text-3xl font-bold text-white">
-              Parcelas a partir de <span className="text-primary-light">R$ 1.000</span> nos primeiros anos de financiamento.
+              Parcelas a partir de <span className="text-primary-light">R$ 1.000,00</span> nos primeiros anos de financiamento.
             </p>
             <div className="mt-4 pt-4 border-t border-white/10 flex items-center gap-4 text-sm font-medium">
               <div className="flex items-center gap-2 text-primary-light">
@@ -609,7 +609,7 @@ const Location = () => {
             <div className="space-y-4">
               <div className="flex items-center gap-4 p-5 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
                 <div className="p-2 bg-primary/20 rounded-lg text-primary-light"><MapPin size={20} /></div>
-                <span className="font-medium">Beira Mar na Praia de Jacarecica do Sul</span>
+                <span className="font-medium">Beira-mar na Praia de Jacarecica</span>
               </div>
               <div className="flex items-center gap-4 p-5 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
                 <div className="p-2 bg-primary/20 rounded-lg text-primary-light"><MapPin size={20} /></div>
@@ -617,7 +617,7 @@ const Location = () => {
               </div>
               <div className="flex items-center gap-4 p-5 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
                 <div className="p-2 bg-primary/20 rounded-lg text-primary-light"><MapPin size={20} /></div>
-                <span className="font-medium">Próximo à nova Avenida Litorânea</span>
+                <span className="font-medium">Próximo ao Parque Shopping</span>
               </div>
             </div>
           </motion.div>
@@ -678,7 +678,7 @@ const Pricing = () => {
             <div className="bg-bg-pastel p-8 sm:p-12 rounded-[2.5rem] shadow-inner border border-gray-100">
               <div className="text-center mb-10">
                 <p className="text-gray-500 text-xs uppercase tracking-widest mb-3 font-bold">Parcelas na Obra</p>
-                <p className="text-5xl sm:text-6xl font-black text-primary tracking-tighter">R$ 1.316<span className="text-2xl">*</span></p>
+                <p className="text-5xl sm:text-6xl font-black text-primary tracking-tighter">R$ 1.316,67<span className="text-2xl">*</span></p>
                 <p className="text-[10px] text-gray-400 mt-4">*Valor referente à unidade 1105. Consulte condições.</p>
               </div>
 
